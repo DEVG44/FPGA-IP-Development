@@ -293,7 +293,28 @@ Cloneed both repositories locally:
 
 #### Q1. Where is the RISC-V program located in the vsd-riscv2 repository?
 
+The program is in the **samples** directory of the vsd-riscv2 repository, where we have files that are used to test the proper working of the RISC-V environment.
+
 #### Q2. How is the program compiled and loaded into memory?
+
+The program is compiled using our toolchain command 
+
+```
+riscv64-unknown-elf-gcc main.c -o program
+```
+
+This makes a RISC-V executable (ELF format) file.
+
+Then it is loaded into memory using spike with this command
+
+```
+spike pk program
+```
+
+This makes a pk (proxy kernel) load our ELF file and set it up into our memory.
+
+Then it executes it so we can simulate it in our terminal.
+
 
 #### Q3. How does the RISC-V core access memory and memory-mapped IO?
 
