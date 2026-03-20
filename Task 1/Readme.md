@@ -182,13 +182,15 @@ spike pk sum1ton.o
 
 You have now:
 
-Launched a full Linux desktop inside GitHub Codespaces
-Compiled and executed a C program with native GCC
-Compiled and executed the same program on a RISC-V target using Spike
-Edited and rebuilt the code using a GUI editor over noVNC
-You’re ready to explore more RISC-V and Verilog labs in this Codespace.
+- Launched a full Linux desktop inside GitHub Codespaces
+- Compiled and executed a C program with native GCC
+- Compiled and executed the same program on a RISC-V target using Spike
+- Edited and rebuilt the code using a GUI editor over noVNC
+- You’re ready to explore more RISC-V and Verilog labs in this Codespace.
+
 
 **Step 2 Complete:- Succesfully verified RISC-V Reference Flow.**
+
 
 ### Step 3: Clone and Run VSDFPGA Labs
 
@@ -198,11 +200,70 @@ Once the RISC-V reference flow works, clone the FPGA labs repository inside the 
 git clone https://github.com/vsdip/vsdfpga_labs.git
 cd vsdfpga_labs
 ```
+
 Follow the README instructions in vsdfpga_labs to:
 
 Build and run the basic lab(s) that do not require FPGA hardware
--Verify successful execution through simulation or logs
-This step validates:
-Multi-repository workflow
-Readiness for IP and SoC-level tasks
+- Verify successful execution through simulation or logs
+- This step validates:
+  - Multi-repository workflow
+  - Readiness for IP and SoC-level tasks
+
+<img width="1918" height="917" alt="12 1" src="https://github.com/user-attachments/assets/4df0c082-31d9-4c96-b913-62da3b3c9e10" />
+
+#### VSDSquadron FPGA mini Lab: Basic Message Display on RISC-V core
+
+###### Prerequisites
+Install the following tools before proceeding:
+
+###### General dependencies
+
+```
+sudo apt-get install git vim autoconf automake autotools-dev curl libmpc-dev \
+libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool \
+patchutils bc zlib1g-dev libexpat1-dev gtkwave picocom -y
+```
+
+
+###### FPGA toolchain (Yosys/NextPNR/IceStorm)
+```
+sudo apt-get install yosys nextpnr-ice40 icestorm iverilog -y
+```
+###### RISC-V Toolchain (GCC 8.3.0)
+
+```
+cd ~
+mkdir -p riscv_toolchain && cd riscv_toolchain
+wget "https://static.dev.sifive.com/dev-tools/riscv64-unknown-elf-gcc-8.3.0-2019.08.0-x86_64-linux-ubuntu14.tar.gz"
+tar -xvzf riscv64-unknown-elf-gcc-*.tar.gz
+echo 'export PATH=$HOME/riscv_toolchain/riscv64-unknown-elf-gcc-8.3.0-2019.08.0-x86_64-linux-ubuntu14/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+```
+
+<img width="1918" height="921" alt="14" src="https://github.com/user-attachments/assets/3e39089a-22f1-4ba3-8801-c853505b656a" />
+
+##### Building & Running
+
+Building the file
+
+```
+git clone https://github.com/vsdip/vsdfpga_labs.git
+cd vsdfpga_labs/basicRISCV/Firmware
+make riscv_logo.bram.hex
+```
+<img width="1918" height="972" alt="15 1" src="https://github.com/user-attachments/assets/7b01d2df-adc2-4e8c-83c1-1c4740c6b4bc" />
+
+
+Compiling and Running the file
+
+```
+riscv64-unknown-elf-gcc -o riscv_logo riscv_logo.c
+spike pk riscv_logo
+```
+
+<img width="1918" height="975" alt="15 2" src="https://github.com/user-attachments/assets/5a40b63e-67bd-4e0d-88ad-83717d6a8abb" />
+
+
+**Step 3 Complete:- Succesfully Cloned and Tested VSDFPGA Labs.**
+
 
