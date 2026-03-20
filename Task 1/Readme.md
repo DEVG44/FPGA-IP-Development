@@ -266,4 +266,36 @@ spike pk riscv_logo
 
 **Step 3 Complete:- Succesfully Cloned and Tested VSDFPGA Labs.**
 
+### Step 4: Local Machine Preparation 
+
+
+#### Instruction 1:- 
+
+Setup the enivornment for RISC-V Devoplemnt on local machine as per the docker file.
+
+<img width="1920" height="1053" alt="image" src="https://github.com/user-attachments/assets/99107644-712d-4d70-809b-def4f8a5398e" />
+
+#### Instruction 2:- 
+
+Cloneed both repositories locally:
+- vsd-riscv2
+- vsdfpga_labs
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/2948e98b-be6a-4319-affc-4ae21a29643b" />
+
+
+
+**Step 4 Complete:- Succesfully Completed Local Machine Preparation.**
+
+
+
+## Understanding Check
+
+#### Q1. Where is the RISC-V program located in the vsd-riscv2 repository?
+
+#### Q2. How is the program compiled and loaded into memory?
+
+#### Q3. How does the RISC-V core access memory and memory-mapped IO?
+
+#### Q4. Where would a new FPGA IP block logically integrate in this system?
 
