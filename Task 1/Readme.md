@@ -76,7 +76,7 @@ Succesfully displayed version infomration for each tool.
   ```
   riscv64-unknown-elf-gcc -o sum1ton.o sum1ton.c
   ```
--Run it with Spike:
+- Run it with Spike:
 
 ```
  spike pk sum1ton.o
@@ -172,6 +172,7 @@ gedit sum1ton.c &
 <img width="1918" height="970" alt="11 1" src="https://github.com/user-attachments/assets/5102d844-e957-4ed5-a69c-df2c903eff71" />
 
 Make changes (for example, change n = 9; to another value), save the file, and re-run:
+
 ```
 riscv64-unknown-elf-gcc -o sum1ton.o sum1ton.c
 spike pk sum1ton.o
@@ -186,3 +187,22 @@ Compiled and executed a C program with native GCC
 Compiled and executed the same program on a RISC-V target using Spike
 Edited and rebuilt the code using a GUI editor over noVNC
 You’re ready to explore more RISC-V and Verilog labs in this Codespace.
+
+**Step 2 Complete:- Succesfully verified RISC-V Reference Flow.**
+
+### Step 3: Clone and Run VSDFPGA Labs
+
+Once the RISC-V reference flow works, clone the FPGA labs repository inside the same Codespace:
+
+```
+git clone https://github.com/vsdip/vsdfpga_labs.git
+cd vsdfpga_labs
+```
+Follow the README instructions in vsdfpga_labs to:
+
+Build and run the basic lab(s) that do not require FPGA hardware
+-Verify successful execution through simulation or logs
+This step validates:
+Multi-repository workflow
+Readiness for IP and SoC-level tasks
+
