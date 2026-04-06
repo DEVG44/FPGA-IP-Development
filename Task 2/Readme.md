@@ -52,12 +52,12 @@ This is reading and understanding, not coding yet.
 
 Instructions:
 
--Create a new RTL module for the GPIO IP
--Implement:
-   -Register storage
-   -Write logic
-  -Readback logic
--Follow synchronous design principles
+- Create a new RTL module for the GPIO IP
+- Implement:
+   - Register storage
+   - Write logic
+   - Readback logic
+- Follow synchronous design principles
 
 GPIO RTL IP FILE:- 
 
@@ -167,8 +167,8 @@ At this point, the IP is part of the system.
 Instructions:
 
 - Write or reuse a small C program that:
-     -Writes values to the GPIO register
-     -Reads back and prints values via UART
+     - Writes values to the GPIO register
+     - Reads back and prints values via UART
 
 C Program: 
 ```
@@ -213,8 +213,8 @@ int main() {
 
 - Run simulation
 - Verify:
-    -Correct register updates
-    -Correct readback behavior
+    - Correct register updates
+    - Correct readback behavior
 
 
 <img width="1918" height="972" alt="1" src="https://github.com/user-attachments/assets/5a2e8265-e15f-43c6-8a14-ff2b76b9b853" />
