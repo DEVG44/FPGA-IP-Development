@@ -211,8 +211,8 @@ int main() {
 }
 ```
 
--Run simulation
--Verify:
+- Run simulation
+- Verify:
     -Correct register updates
     -Correct readback behavior
 
