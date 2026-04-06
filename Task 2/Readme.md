@@ -46,7 +46,7 @@ Instructions:
 
 This is reading and understanding, not coding yet.
 
-#### Step 1 Completed:- Analysed the riscv.v SOC file and understood the existing peripherals and registers.
+#### Step 1 Completed:- Successfully Analysed the riscv.v SOC file and understood the existing peripherals and registers.
 
 ### Step 2: Write the IP RTL
 
@@ -90,6 +90,8 @@ module gpio_ip (
     end
 endmodule
 ```
+
+#### Step 2 Completed:- Successfully wrote the GPIO IP RTL File.
 
 ### Step 3: Integrate the IP into the SoC 
 
@@ -157,3 +159,67 @@ gpio_ip GPIO (
 ```
 
 At this point, the IP is part of the system.
+
+#### Step 3 Completed:- Successfully integrated the GPIO IP into the existing SOC.
+
+### Step 4: Validate using Simulation 
+
+Instructions:
+
+- Write or reuse a small C program that:
+     -Writes values to the GPIO register
+     -Reads back and prints values via UART
+
+C Program: 
+```
+#include <stdint.h>
+
+// Memory map based on your 1-hot encoding
+#define UART_DAT (*(volatile uint32_t*)0x00400008) // Bit 1 of word addr
+#define GPIO_REG (*(volatile uint32_t*)0x00400020) // Bit 3 of word addr
+
+void print_str(const char *str) {
+    while (*str) {
+        UART_DAT = *str++;
+    }
+}
+
+int main() {
+    uint32_t test_val = 0x12345678;
+    
+    print_str("\n--- Starting GPIO IP Test ---\n");
+
+    // Write to the GPIO register
+    GPIO_REG = test_val;
+    print_str("Data written to GPIO.\n");
+    
+    // Read back from the GPIO register
+    uint32_t readback = GPIO_REG;
+
+    // Validate and print result
+    if (readback == test_val) {
+        print_str("SUCCESS: Readback matches 0x12345678!\n");
+    } else {
+        print_str("ERROR: Readback failed.\n");
+    }
+
+    print_str("--- Test Complete ---\n");
+
+    // Infinite loop to stop execution
+    while(1); 
+    return 0;
+}
+```
+
+-Run simulation
+-Verify:
+    -Correct register updates
+    -Correct readback behavior
+
+
+<img width="1918" height="972" alt="1" src="https://github.com/user-attachments/assets/5a2e8265-e15f-43c6-8a14-ff2b76b9b853" />
+<img width="1262" height="772" alt="2" src="https://github.com/user-attachments/assets/72d994bc-7248-4fd7-9cda-24561a01d0fb" />
+<img width="1918" height="975" alt="3" src="https://github.com/user-attachments/assets/15b7e50a-c415-4b48-96cb-1eac4bf85f06" />
+<img width="1918" height="972" alt="4" src="https://github.com/user-attachments/assets/cc8c8449-39a0-4e7c-a8f8-1d706958ba5d" />
+
+
