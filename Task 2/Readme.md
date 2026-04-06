@@ -222,4 +222,4 @@ int main() {
 <img width="1918" height="975" alt="3" src="https://github.com/user-attachments/assets/15b7e50a-c415-4b48-96cb-1eac4bf85f06" />
 <img width="1918" height="972" alt="4" src="https://github.com/user-attachments/assets/cc8c8449-39a0-4e7c-a8f8-1d706958ba5d" />
 
-
+#### Step 4 Completed:- Successfully validated using simulation.
