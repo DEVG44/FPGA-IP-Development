@@ -188,3 +188,65 @@ wire [31:0] gpio_io;    // <-- CHANGED to bidirectional inout wire
 
 #### Step 3 Completed:- Successfully integrated extended RTL with required changes into the existing SOC.
 
+### Step 4: Software Validation 
+
+Instructions:
+
+- Sets GPIO direction
+- Writes values to GPIO_DATA
+- Reads GPIO_READ
+- Prints results via UART
+
+Simulation proof is mandatory.
+
+Expected validation:
+- Direction control works
+- Output updates are reflected
+- Readback behaves as expected
+
+C Program:-
+```
+#include <stdint.h>
+
+void print_str(const char *str) {
+    while (*str) {
+        *((volatile uint32_t *)0x00400008) = *str++;
+    }
+}
+
+#define GPIO_BASE 0x00400020
+#define GPIO_DATA (*((volatile uint32_t*)(GPIO_BASE + 0x00)))
+#define GPIO_DIR  (*((volatile uint32_t*)(GPIO_BASE + 0x04)))
+#define GPIO_READ (*((volatile uint32_t*)(GPIO_BASE + 0x08)))
+
+int main() {
+    print_str("\n--- Starting Multi-Register GPIO Test ---\n");
+
+    GPIO_DIR = 0xFFFFFFFF; // Set as outputs
+    print_str("Direction Register (0x04) configured as outputs.\n");
+
+    uint32_t test_val = 0x87654321;
+    GPIO_DATA = test_val;
+    print_str("Data Register (0x00) written with 0x87654321.\n");
+
+    uint32_t readback = GPIO_READ;
+    if (readback == test_val) {
+        print_str("SUCCESS: Physical pins (0x08) match the driven data!\n");
+    } else {
+        print_str("ERROR: Readback mismatch.\n");
+    }
+    
+    print_str("--- Test Complete ---\n");
+    while(1); 
+    return 0;
+}
+
+```
+
+Simulation:-
+<img width="1918" height="972" alt="1" src="https://github.com/user-attachments/assets/68df0991-0db1-40b3-9cde-13a1a7c96cf8" />
+
+Waveform:-
+<img width="1918" height="975" alt="2" src="https://github.com/user-attachments/assets/adfe154c-2d18-4d05-ad83-3de037dd5bdc" />
+
+#### Step 4 Completed:- Successfully simulated the new IP and obtained waveform.
