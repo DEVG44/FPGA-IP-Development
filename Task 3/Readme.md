@@ -26,9 +26,8 @@ This is a very common real-world GPIO peripheral.
 
 ### Register Map
 
-<img width="526" height="155" alt="image" src="https://github.com/user-attachments/assets/9343f45c-3888-4245-97b6-0388076e7fa3" />
+<img width="523" height="152" alt="image" src="https://github.com/user-attachments/assets/5386bf84-2816-4633-9089-4fe88e2ef8a3" />
 
-Base address will be assigned or reused from Task-2.
 
 ## Functional Requirements
 
@@ -45,3 +44,29 @@ Base address will be assigned or reused from Task-2.
 - Returns current GPIO pin values
 - For output pins, reflects driven value
 - For input pins, reflects pin state
+
+## Task Breakdown
+
+### Step 1: Study and Plan
+
+Instructions:
+
+- Review their Task-2 GPIO IP
+- Identify where to add:
+      - Additional registers
+      - Address offset decoding
+- Define internal signals clearly (data, direction, readback)
+
+### Step 2: Implement Multi-Register RTL 
+
+Instructions:
+
+- Extend the GPIO IP RTL to support:
+       - Multiple registers
+       - Address offset decoding
+
+- Ensure:
+      - Clean synchronous logic
+      - No unintended latch behavior
+      - Correct write and read handling
+
