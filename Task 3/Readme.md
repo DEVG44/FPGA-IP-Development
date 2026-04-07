@@ -53,8 +53,8 @@ Instructions:
 
 - Review their Task-2 GPIO IP
 - Identify where to add:
-      - Additional registers
-      - Address offset decoding
+       - Additional registers
+       - Address offset decoding
 - Define internal signals clearly (data, direction, readback)
 
 ### Step 2: Implement Multi-Register RTL 
@@ -62,11 +62,11 @@ Instructions:
 Instructions:
 
 - Extend the GPIO IP RTL to support:
-       - Multiple registers
-       - Address offset decoding
+        - Multiple registers
+        - Address offset decoding
 
 - Ensure:
-      - Clean synchronous logic
-      - No unintended latch behavior
-      - Correct write and read handling
+       - Clean synchronous logic
+       - No unintended latch behavior
+       - Correct write and read handling
 
