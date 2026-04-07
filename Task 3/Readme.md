@@ -129,3 +129,62 @@ endmodule
 
 #### Step 2 Completed:- Successfully extended RTL and ensured required changes.
 
+### Step 3: Integrate into the SoC 
+
+Instructions:
+
+- Update SoC integration logic if needed
+- Ensure address decoding routes accesses correctly
+- Expose GPIO signals to the top module as before
+
+#### Upgrading the Wires for Input Support
+
+In Task-2, the IP only pushed data out. In Task-3, WE added a Direction register and the ability to read physical inputs. We had to change the top-level wire from a one-way output to a two-way bidirectional wire.
+
+**MODIFIED:** Changed the gpio_out wire to gpio_io.
+```
+// Task-2 (Old): wire [31:0] gpio_out;
+// Task-3 (New): 
+wire [31:0] gpio_io; // Now supports both driving LEDs and reading Buttons
+```
+#### Passing the Address Offsets
+
+The new IP needs to know which internal register the CPU wants (0x00, 0x04, or 0x08). To do this, we routed the bottom 4 bits of the CPU's memory address bus directly into the IP.
+
+**ADDED:** Wired mem_addr[3:0] to the new .addr port on our IP.
+
+#### Consolidating the Write Strobe
+
+The RISC-V CPU uses a 4-bit "Write Strobe" (mem_wstrb) to indicate which specific bytes of the 32-bit word are being written. To make your IP's internal logic simpler, we used a Verilog reduction operator (|) to tell the IP to write if any of those byte bits are high.
+
+**MODIFIED:** Changed the .we port connection.
+
+#### The Final Instantiation Block
+
+Here is what the final updated block looks like in our riscv.v file, with the specific Task-3 changes highlighted:
+
+```
+wire [31:0] gpio_io;    // <-- CHANGED to bidirectional inout wire
+    wire [31:0] gpio_rdata; 
+
+    gpio_ip GPIO (
+        .clk(clk),
+        .rst(!resetn),
+        .valid(gpio_valid),
+        
+        // <-- CHANGED: Reduction OR. High if any bit of mem_wstrb is 1.
+        .we(|mem_wstrb),        
+        
+        // <-- ADDED: Passes offset (0x00, 0x04, 0x08) to the IP
+        .addr(mem_addr[3:0]),   
+        
+        .wdata(mem_wdata),
+        .rdata(gpio_rdata),
+        
+        // <-- CHANGED: Connected to the new bidirectional bus
+        .gpio_io(gpio_io)       
+    );
+```
+
+#### Step 3 Completed:- Successfully integrated extended RTL with required changes into the existing SOC.
+
